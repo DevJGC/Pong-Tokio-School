@@ -6,11 +6,12 @@ public class MetaPlayer2 : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip audioClip;
+    [SerializeField] GameController gameController;
 
-    
+
     void Start()
     {
-        
+        gameController = FindObjectOfType<GameController>();
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class MetaPlayer2 : MonoBehaviour
         if (collision.gameObject.tag == "Ball")
         {
             audioSource.PlayOneShot(audioClip);
+            gameController.Player1Scored();
         }
     }
 

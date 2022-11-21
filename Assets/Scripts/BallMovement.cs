@@ -5,12 +5,12 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour
 {
 
-    int directionX;
-    int directionY;
+    public int directionX;
+    public int directionY;
 
     int direInicial;
 
-    [SerializeField] float velocity;
+    public float velocity;
     [SerializeField] int hits;
     [SerializeField] AudioSource sounds;
     [SerializeField] AudioClip clipHit;
@@ -19,7 +19,7 @@ public class BallMovement : MonoBehaviour
 
 
 
-
+    
 
 
     void Start()
@@ -61,11 +61,12 @@ public class BallMovement : MonoBehaviour
         }
         
         // Resta una vida y si llega a 0 resetea
-        hits--;
-        if (hits == 0)
-        {
-            directionStart();
-        }
+        
+        //hits--;
+        //if (hits == 0)
+        //{
+        //    directionStart();
+        //}
 
     }
 
@@ -75,11 +76,12 @@ public class BallMovement : MonoBehaviour
     // Inicia la bola en una direccion aleatoria y mira si no tiene vida, en cuyo caso resetea
     void directionStart()
     {
-        if (hits == 0)
-        {
-            transform.position = new Vector3(0, 0, 0);
-            hits = 10;
-        }
+        //if (hits == 0)
+        //{
+        //    transform.position = new Vector3(0, 0, 0);
+        //    hits = 10;
+        //    velocity = 2;
+        //}
 
         direInicial = Random.Range(1, 5);
 
