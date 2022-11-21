@@ -8,6 +8,7 @@ public class MetaPlayer1 : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip audioClip;
     [SerializeField] GameController gameController;
+    [SerializeField] BallMovement ball;
 
 
     void Start()
@@ -27,6 +28,7 @@ public class MetaPlayer1 : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClip);
             gameController.Player2Scored();
+            ball.velocity = 2;
         }
     }
 

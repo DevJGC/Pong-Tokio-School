@@ -387,6 +387,7 @@ MonoBehaviour:
   audioSource: {fileID: 251645530}
   audioClip: {fileID: 8300000, guid: aa89b98912f15fa4f8cf127531061c38, type: 3}
   gameController: {fileID: 668157280}
+  ball: {fileID: 416746739}
 --- !u!50 &251645529
 Rigidbody2D:
   serializedVersion: 4
@@ -1572,6 +1573,7 @@ MonoBehaviour:
   audioSource: {fileID: 740149016}
   audioClip: {fileID: 8300000, guid: aa89b98912f15fa4f8cf127531061c38, type: 3}
   gameController: {fileID: 668157280}
+  ball: {fileID: 416746739}
 --- !u!50 &740149015
 Rigidbody2D:
   serializedVersion: 4
