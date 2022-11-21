@@ -18,7 +18,9 @@ public class GameController : MonoBehaviour
     public int player1Score;
 
     public int player2Score;
-    
+
+    bool isPlaying = false;
+
 
     void Start()
     {
@@ -28,12 +30,12 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isPlaying)
         {
 
             StartCoroutine("clearText");
 
-
+            isPlaying = true;
 
         }
     }
