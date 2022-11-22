@@ -16,32 +16,47 @@ public class MenuControl : MonoBehaviour
 
     // Si es TRUE es 1 Jugador, si es FALSE son 2 Jugadores
     [SerializeField] bool isPlayer = true;
+
+    // Variable de datos "PlayerPref" de tipo INT para guardar el número de jugadores
+    public int players;
+
+    void Awake()
+
+    {
+        // Carga el valor de la variable "PlayerPref" "Players" y lo guarda en la variable "players"
+        players = PlayerPrefs.GetInt("Players",1);
+        if (players == 1)
+        {
+            optionPlayer1();
+        }
+        if (players == 2)
+        {
+            optionPlayer2();
+        }
+        
+    }
+
+
+
+
+
     void Start()
     {
-        onePlayer.text = "-> ONE PLAYER <-";
-        onePlayer.fontSize = 6;
-        twoPlayer.fontSize = 5;      
+       // Debug.Log("Players: " + players);
+       // onePlayer.text = "-> ONE PLAYER <-";
+       // onePlayer.fontSize = 6;
+       // twoPlayer.fontSize = 5;      
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) || (Input.GetKeyDown(KeyCode.W)))
         {
-            soundOption.PlayOneShot(upDown);
-            onePlayer.text = "-> ONE PLAYER <-";
-            twoPlayer.text = "TWO PLAYERS";
-            onePlayer.fontSize = 6;
-            twoPlayer.fontSize = 5;
-            isPlayer = true;
+            optionPlayer1();
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) || (Input.GetKeyDown(KeyCode.S)))
         {
-            soundOption.PlayOneShot(upDown);
-            onePlayer.text = "ONE PLAYER";
-            twoPlayer.text = "-> TWO PLAYERS <-";
-            onePlayer.fontSize = 5;
-            twoPlayer.fontSize = 6;
-            isPlayer = false;
+            optionPlayer2();
         }  
 
         if (Input.GetKeyDown(KeyCode.Return) || (Input.GetKeyDown(KeyCode.Space)))
@@ -51,6 +66,38 @@ public class MenuControl : MonoBehaviour
             StartCoroutine(LoadScene());
         }
         
+    }
+
+
+    private void optionPlayer1()
+    
+    {
+            soundOption.PlayOneShot(upDown);
+            onePlayer.text = "-> ONE PLAYER <-";
+            twoPlayer.text = "TWO PLAYERS";
+            onePlayer.fontSize = 6;
+            twoPlayer.fontSize = 5;
+            isPlayer = true;
+            PlayerPrefs.SetInt("Players",1);
+            players = PlayerPrefs.GetInt("Players");
+            
+
+    }
+
+    private void optionPlayer2()
+    {
+
+            soundOption.PlayOneShot(upDown);
+            onePlayer.text = "ONE PLAYER";
+            twoPlayer.text = "-> TWO PLAYERS <-";
+            onePlayer.fontSize = 5;
+            twoPlayer.fontSize = 6;
+            isPlayer = false;
+            PlayerPrefs.SetInt("Players",2);
+            players = PlayerPrefs.GetInt("Players");
+           
+
+
     }
 
  IEnumerator LoadScene()

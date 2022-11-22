@@ -24,10 +24,20 @@ public class GameController : MonoBehaviour
 
     bool isPlaying = false;
 
+    public int players;
 
     void Start()
     {
-        
+        players = PlayerPrefs.GetInt("Players");
+
+
+        if (players==1)
+        {
+            //player2.SetActive(false);
+            player2.GetComponent<PlayerMovement>().enabled = false;
+            player2.GetComponent<Player2COM>().enabled = true;
+        }
+
     }
 
   
@@ -49,7 +59,7 @@ public class GameController : MonoBehaviour
         if (player1Score == 10)
         {
             player1ScoreText.color = Color.yellow;
-            player1ScoreText.text = "\n Player 1 Wins!";
+            player1ScoreText.text = "\n Player 1 Wins!!";
             player2ScoreText.text = "\n Player 2 Loses!";
             StartCoroutine("resetGame");
         }
@@ -58,7 +68,7 @@ public class GameController : MonoBehaviour
         {
             player2ScoreText.color = Color.yellow;
             player1ScoreText.text = "\n Player 1 Loses!";
-            player2ScoreText.text = "\n Player 2 Wins!";
+            player2ScoreText.text = "\n Player 2 Wins!!";
             StartCoroutine("resetGame");
         }
 

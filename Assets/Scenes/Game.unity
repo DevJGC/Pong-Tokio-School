@@ -651,6 +651,7 @@ GameObject:
   - component: {fileID: 414640003}
   - component: {fileID: 414640004}
   - component: {fileID: 414640006}
+  - component: {fileID: 414640007}
   m_Layer: 0
   m_Name: PlayerTwo
   m_TagString: Left_Right
@@ -786,6 +787,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   isPlayerOne: 0
+  players: 0
+--- !u!114 &414640007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414640000}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0bd3b65e7b37094689cd9c175de0d29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 416746734}
+  speed: 0
 --- !u!1 &414744418
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,8 +868,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1332,8 +1348,9 @@ MonoBehaviour:
   source: {fileID: 668157282}
   clip: {fileID: 8300000, guid: fa711b638ecddc243a5c6451d77dc01b, type: 3}
   complet: {fileID: 8300000, guid: 05a9b23a3ee0f9649ae7d52fd846fe7f, type: 3}
-  player1Score: 9
-  player2Score: 9
+  player1Score: 0
+  player2Score: 0
+  players: 0
 --- !u!4 &668157281
 Transform:
   m_ObjectHideFlags: 0
@@ -1975,6 +1992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   isPlayerOne: 1
+  players: 0
 --- !u!1 &1361353580
 GameObject:
   m_ObjectHideFlags: 0
