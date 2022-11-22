@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 public class GameController : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Animation animText;
     [SerializeField] AudioSource source;
     [SerializeField] AudioClip clip;
+    [SerializeField] AudioClip complet; 
 
     public int player1Score;
 
@@ -27,7 +30,7 @@ public class GameController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isPlaying)
@@ -40,11 +43,47 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void CheckScore()
+    
+    {
+        if (player1Score == 10)
+        {
+            player1ScoreText.color = Color.yellow;
+            player1ScoreText.text = "\n Player 1 Wins!";
+            player2ScoreText.text = "\n Player 2 Loses!";
+            StartCoroutine("resetGame");
+        }
+
+        if (player2Score == 10)
+        {
+            player2ScoreText.color = Color.yellow;
+            player1ScoreText.text = "\n Player 1 Loses!";
+            player2ScoreText.text = "\n Player 2 Wins!";
+            StartCoroutine("resetGame");
+        }
+
+    }
+
+        IEnumerator resetGame()
+    {
+        source.PlayOneShot(complet);
+        yield return new WaitForSeconds(1f);
+        ball.GetComponent<BallMovement>().velocity = 0;
+        ball.transform.position = new Vector2(0, 0); 
+        ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("Menu");  
+
+    }
+
+
     public void Player1Scored()
     {
         player1Score++;
         player1ScoreText.text = player1Score.ToString();
         Invoke("ResetBall1",1f);
+        CheckScore();
+
     }
 
     public void Player2Scored()
@@ -52,6 +91,7 @@ public class GameController : MonoBehaviour
         player2Score++;
         player2ScoreText.text = player2Score.ToString();
         Invoke("ResetBall2", 1f);
+        CheckScore();
     }
 
     public void ResetBall1()

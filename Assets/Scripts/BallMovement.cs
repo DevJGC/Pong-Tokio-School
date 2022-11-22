@@ -18,10 +18,6 @@ public class BallMovement : MonoBehaviour
     [SerializeField] AudioClip lose;
 
 
-
-    
-
-
     void Start()
     {
         // Inicia la bola 
