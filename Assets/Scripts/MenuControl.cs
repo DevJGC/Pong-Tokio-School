@@ -14,7 +14,6 @@ public class MenuControl : MonoBehaviour
     [SerializeField] AudioSource soundOption;
     [SerializeField] Animation insertCoinAnim;
 
-
     // Si es TRUE es 1 Jugador, si es FALSE son 2 Jugadores
     [SerializeField] bool isPlayer = true;
 
@@ -24,7 +23,6 @@ public class MenuControl : MonoBehaviour
 
     // Control 1 o 2 jugadores según variable PlayerPrefs
     void Awake()
-
     {
         // Carga el valor de la variable "PlayerPref" "Players" y lo guarda en la variable "players"
         players = PlayerPrefs.GetInt("Players",1);
@@ -35,8 +33,7 @@ public class MenuControl : MonoBehaviour
         if (players == 2)
         {
             optionPlayer2();
-        }
-        
+        }      
     }
 
     // Por ahora sin utilizar
@@ -71,8 +68,7 @@ public class MenuControl : MonoBehaviour
         {
             Application.Quit();
             UnityEditor.EditorApplication.isPlaying = false;
-        }
-        
+        }     
     }
 
     // Opción 1 Jugador - Cambia texto - Muestra sonido - Guarda y carga variable PlayerPrefs
@@ -107,5 +103,4 @@ public class MenuControl : MonoBehaviour
         yield return new WaitForSeconds(1f);     
         SceneManager.LoadScene("Game");      
     }
-
 }

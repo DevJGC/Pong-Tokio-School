@@ -28,7 +28,6 @@ public class BallMovement : MonoBehaviour
     {
         // Inicia la bola en una dirección aleatoria
         directionStart();
-
     }
 
 
@@ -36,31 +35,26 @@ public class BallMovement : MonoBehaviour
     {
         // Mueve la bola
         transform.Translate((directionX) * Time.deltaTime * velocity, (directionY) * Time.deltaTime * velocity, 0);
-
     }
 
   
     // Detecta colisiones con paredes o techo/suelo
     private void OnCollisionEnter2D(Collision2D other)
-    {
-       
+    {     
         // Sonido colisión Ball
         sounds.PlayOneShot(clipHit);
 
         // Si choca con las paletas (Izquierda o Derecha)
         if (other.gameObject.tag == "Left_Right")
-        {
-            
+        {         
             // Invierte direccion en X
             directionX = directionX * -1;
             velocity = velocity + 0.5f;
-
         }
 
         // Si toca con el techo o suelo
         if (other.gameObject.tag == "Up_Down")
-        {
-            
+        {          
             // Invierte direccion en Y
             directionY = directionY * -1;
         }
@@ -70,18 +64,17 @@ public class BallMovement : MonoBehaviour
         if (hits == 0)
         {
             // Tras llegar a 0 resetea Ball
+
             //directionStart();
         }
-
     }
-
-
 
 
     // Inicia la bola en una direccion aleatoria y mira si no tiene vida, en cuyo caso resetea
     void directionStart()
     {
         // Cuando los toques llegan a 0 resetea Ball
+
         //if (hits == 0)
         //{
         //    transform.position = new Vector3(0, 0, 0);
@@ -102,23 +95,17 @@ public class BallMovement : MonoBehaviour
                 directionX = -1;
                 directionY = 1;
                 break;
-
             case 3:
                 directionX = 1;
                 directionY = -1;
                 break;
-
             case 4:
                 directionX = -1;
                 directionY = -1;
                 break;
-
             default:
                 // Debug.Log("No hay direccion!!");
                 break;
-
         }
-
     }
-
 }

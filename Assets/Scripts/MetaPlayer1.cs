@@ -32,5 +32,4 @@ public class MetaPlayer1 : MonoBehaviour
             ball.velocity = 2;
         }
     }
-
 }

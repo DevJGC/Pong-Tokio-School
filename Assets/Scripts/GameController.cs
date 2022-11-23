@@ -36,14 +36,12 @@ public class GameController : MonoBehaviour
         // Carga en la variable "players" el valor guardado en PlayerPrefs para saber si es un jugador o dos
         players = PlayerPrefs.GetInt("Players");
 
-
         // Si es un único jugador, desactiva Script 2 jugadores y activa segundo jugador controlado por IA
         if (players==1)
         {
             player2.GetComponent<PlayerMovement>().enabled = false;
             player2.GetComponent<Player2COM>().enabled = true;
         }
-
     }
 
     // Si pulsa Space y aún no ha comenzado el juego, le da comienzo
@@ -51,11 +49,8 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isPlaying)
         {
-
             StartCoroutine("clearText");
-
             isPlaying = true;
-
         }
 
         // Al pulsar Escape sale al Menú de inicio
@@ -63,12 +58,10 @@ public class GameController : MonoBehaviour
         {
             SceneManager.LoadScene("Menu");
         }
-
     }
 
     // Revisa la puntuación de los jugadores y termina cuando el primero llega a 10 puntos y lo muestra por pantalla
-    void CheckScore()
-    
+    void CheckScore()  
     {
         if (player1Score == 10)
         {
@@ -85,7 +78,6 @@ public class GameController : MonoBehaviour
             player2ScoreText.text = "\n Player 2 Wins!!";
             StartCoroutine("resetGame");
         }
-
     }
 
     // Resetea el juego volviendo los valores a su origen y vuelve al Menú
@@ -98,7 +90,6 @@ public class GameController : MonoBehaviour
         ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("Menu");  
-
     }
 
     // Suma 1 punto al jugador 1 y lo muestra por pantalla. Resetea bola para sacar desde puerta
@@ -108,7 +99,6 @@ public class GameController : MonoBehaviour
         player1ScoreText.text = player1Score.ToString();
         Invoke("ResetBall1",1f);
         CheckScore();
-
     }
 
     // Suma 1 punto al jugador 2 y lo muestra por pantalla. Resetea bola para sacar desde puerta
@@ -144,7 +134,5 @@ public class GameController : MonoBehaviour
         source.PlayOneShot(clip);
         yield return new WaitForSeconds(.5f);
         textIntro.text = " ";
-
     }
-
 }
