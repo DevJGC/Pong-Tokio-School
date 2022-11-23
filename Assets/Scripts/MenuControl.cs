@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuControl : MonoBehaviour
 {
+    // Asigna objetos al controlador
     [SerializeField] TMP_Text onePlayer;
     [SerializeField] TMP_Text twoPlayer;
     [SerializeField] AudioClip insertCoin;
@@ -20,6 +21,8 @@ public class MenuControl : MonoBehaviour
     // Variable de datos "PlayerPref" de tipo INT para guardar el número de jugadores
     public int players;
 
+
+    // Control 1 o 2 jugadores según variable PlayerPrefs
     void Awake()
 
     {
@@ -36,20 +39,16 @@ public class MenuControl : MonoBehaviour
         
     }
 
-
-
-
-
+    // Por ahora sin utilizar
     void Start()
     {
-       // Debug.Log("Players: " + players);
-       // onePlayer.text = "-> ONE PLAYER <-";
-       // onePlayer.fontSize = 6;
-       // twoPlayer.fontSize = 5;      
+
     }
 
+    // Cambia entre las opciones de 1 Jugador o 2 Jugadores y comienza partida
     void Update()
     {
+        // Selecciona 1 o 2 jugadores pulsando flechas Arriba o Abajo o W - S
         if (Input.GetKeyDown(KeyCode.UpArrow) || (Input.GetKeyDown(KeyCode.W)))
         {
             optionPlayer1();
@@ -59,18 +58,25 @@ public class MenuControl : MonoBehaviour
             optionPlayer2();
         }  
 
+        // Comienza el juego tras pulsar Enter o Space
         if (Input.GetKeyDown(KeyCode.Return) || (Input.GetKeyDown(KeyCode.Space)))
         {
             soundOption.PlayOneShot(insertCoin);
             insertCoinAnim.Play();
             StartCoroutine(LoadScene());
         }
+
+        // Sale de juego
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
         
     }
 
-
-    private void optionPlayer1()
-    
+    // Opción 1 Jugador - Cambia texto - Muestra sonido - Guarda y carga variable PlayerPrefs
+    private void optionPlayer1()  
     {
             soundOption.PlayOneShot(upDown);
             onePlayer.text = "-> ONE PLAYER <-";
@@ -79,14 +85,12 @@ public class MenuControl : MonoBehaviour
             twoPlayer.fontSize = 5;
             isPlayer = true;
             PlayerPrefs.SetInt("Players",1);
-            players = PlayerPrefs.GetInt("Players");
-            
-
+            players = PlayerPrefs.GetInt("Players");          
     }
 
+    // Opción 2 Jugadores - Cambia texto - Muestra sonido - Guarda y carga variable PlayerPrefs
     private void optionPlayer2()
     {
-
             soundOption.PlayOneShot(upDown);
             onePlayer.text = "ONE PLAYER";
             twoPlayer.text = "-> TWO PLAYERS <-";
@@ -95,17 +99,13 @@ public class MenuControl : MonoBehaviour
             isPlayer = false;
             PlayerPrefs.SetInt("Players",2);
             players = PlayerPrefs.GetInt("Players");
-           
-
-
     }
 
- IEnumerator LoadScene()
+    // Carga escena Juego tras una pequeña pausa
+    IEnumerator LoadScene()
     {
         yield return new WaitForSeconds(1f);     
         SceneManager.LoadScene("Game");      
     }
 
-
-    
 }

@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-
+    // Direcciones Ball
     public int directionX;
     public int directionY;
 
+    // Dirección aleatoria inicial Ball
     int direInicial;
 
+    // Velocidad Ball
     public float velocity;
+
+    // Contador de toques con las paredes o paletas
     [SerializeField] int hits;
+
+    // Sonidos
     [SerializeField] AudioSource sounds;
     [SerializeField] AudioClip clipHit;
     [SerializeField] AudioClip win;
@@ -20,7 +26,7 @@ public class BallMovement : MonoBehaviour
 
     void Start()
     {
-        // Inicia la bola 
+        // Inicia la bola en una dirección aleatoria
         directionStart();
 
     }
@@ -34,35 +40,38 @@ public class BallMovement : MonoBehaviour
     }
 
   
-    // Detecta colisiones con paredes o techo/suelo - Resta una vida en cada choque y resetea a los 10
+    // Detecta colisiones con paredes o techo/suelo
     private void OnCollisionEnter2D(Collision2D other)
     {
        
+        // Sonido colisión Ball
         sounds.PlayOneShot(clipHit);
-        
+
+        // Si choca con las paletas (Izquierda o Derecha)
         if (other.gameObject.tag == "Left_Right")
         {
-            //Debug.Log("Hay colision con pared");
+            
             // Invierte direccion en X
             directionX = directionX * -1;
             velocity = velocity + 0.5f;
 
         }
 
+        // Si toca con el techo o suelo
         if (other.gameObject.tag == "Up_Down")
         {
-            //Debug.Log("Hay colision con techo");
+            
             // Invierte direccion en Y
             directionY = directionY * -1;
         }
         
-        // Resta una vida y si llega a 0 resetea
-        
-        //hits--;
-        //if (hits == 0)
-        //{
-        //    directionStart();
-        //}
+        // Contador de toques de Ball con cualquier cosa
+        hits--;
+        if (hits == 0)
+        {
+            // Tras llegar a 0 resetea Ball
+            //directionStart();
+        }
 
     }
 
@@ -72,6 +81,7 @@ public class BallMovement : MonoBehaviour
     // Inicia la bola en una direccion aleatoria y mira si no tiene vida, en cuyo caso resetea
     void directionStart()
     {
+        // Cuando los toques llegan a 0 resetea Ball
         //if (hits == 0)
         //{
         //    transform.position = new Vector3(0, 0, 0);
@@ -79,6 +89,7 @@ public class BallMovement : MonoBehaviour
         //    velocity = 2;
         //}
 
+        // Dirección aleatoria al comienzo de la partida
         direInicial = Random.Range(1, 5);
 
         switch (direInicial)
